@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: minimalapi-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root082127
+      MYSQL_DATABASE: MinimalApi
+      MYSQL_USER: gabriel
+      MYSQL_PASSWORD: 082127
+    ports:
+      - "3306:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+
+volumes:
+  dbdata:
