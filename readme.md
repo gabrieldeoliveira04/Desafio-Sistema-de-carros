@@ -1,61 +1,66 @@
-# GitHub Codespaces ♥️ .NET
+# Desafio: Sistema de Carros
 
-Want to try out the latest performance improvements coming with .NET for web development? 
+Repositório desenvolvido por **Gabriel de Oliveira** como entrega do desafio de criação de uma Minimal API com CRUD de Administradores e Veículos, usando JWT, autenticação, autorização por roles e documentação via Swagger.
 
-This repo builds a Weather API, OpenAPI integration to test with [Scalar](https://learn.microsoft.com/aspnet/core/fundamentals/openapi/using-openapi-documents?view=aspnetcore-9.0#use-scalar-for-interactive-api-documentation), and displays the data in a web application using Blazor with .NET. 
+## 🚀 Tecnologias
 
-We've given you both a frontend and backend to play around with and where you go from here is up to you!
+- .NET 8 Minimal API
+- Entity Framework Core
+- MySQL
+- JWT (Json Web Token)
+- Swagger / OpenAPI 3.0
 
-Everything you do here is contained within this one codespace. There is no repository on GitHub yet. If and when you’re ready you can click "Publish Branch" and we’ll create your repository and push up your project. If you were just exploring then and have no further need for this code then you can simply delete your codespace and it's gone forever.
+## 📦 Funcionalidades
 
-### Run Options
+### Administradores
+- `POST /administradores` → Criação de novos administradores (somente Admin)
+- `GET /administradores` → Lista todos os administradores com paginação (somente Admin)
+- `GET /administradores/{id}` → Busca administrador por ID (somente Admin)
+- `POST /login` → Login de administrador e geração de token JWT
 
-[![Open in GitHub Codespaces](https://img.shields.io/static/v1?style=for-the-badge&label=GitHub+Codespaces&message=Open&color=lightgrey&logo=github)](https://codespaces.new/github/dotnet-codespaces)
-[![Open in Dev Container](https://img.shields.io/static/v1?style=for-the-badge&label=Dev+Container&message=Open&color=blue&logo=visualstudiocode)](https://vscode.dev/redirect?url=vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=https://github.com/github/dotnet-codespaces)
+### Veículos
+- `POST /veiculos` → Cria um veículo (Admin ou Editor)
+- `GET /veiculos` → Lista veículos, com filtros opcionais `nome` e `marca` e paginação (Admin ou Editor)
+- `GET /veiculos/{id}` → Busca veículo por ID (Admin ou Editor)
+- `PUT /veiculos/{id}` → Atualiza veículo existente (Admin ou Editor)
+- `DELETE /veiculos/{id}` → Apaga veículo pelo ID (Admin ou Editor)
 
-You can also run this repository locally by following these instructions: 
-1. Clone the repo to your local machine `git clone https://github.com/github/dotnet-codespaces`
-1. Open repo in VS Code
+### Home
+- `GET /` → Endpoint inicial que retorna informações básicas da API
 
-## Getting started
+## 🔧 Configuração
 
-1. **📤 One-click setup**: [Open a new Codespace](https://codespaces.new/github/dotnet-codespaces), giving you a fully configured cloud developer environment.
-2. **▶️ Run all, one-click again**: Use VS Code's built-in *Run* command and open the forwarded ports *8080* and *8081* in your browser. 
+1. Clone o repositório:
+   ```bash
+   git clone https://github.com/gabrieldeoliveira04/Desafio-Sistema-de-carros.git
+Configure a string de conexão MySQL em appsettings.json:
 
-![Debug menu in VS Code showing Run All](images/RunAll.png)
+json
+Copiar código
+"ConnectionStrings": {
+  "mysql": "server=localhost;database=minimalapi;user=root;password=1234"
+}
+Configure JWT em appsettings.json:
 
-3. The Blazor web app and Scalar can be open by heading to **/scalar** in your browser. On Scalar, head to the backend API and click "Test Request" to call and test the API. 
+json
+Copiar código
+"Jwt": {
+  "Key": "sua-chave-secreta",
+  "Issuer": "SeuProjeto",
+  "Audience": "SeuProjeto",
+  "ExpireMinutes": "60"
+}
+Execute a aplicação:
 
-![A website showing weather](images/BlazorApp.png)
+bash
+Copiar código
+dotnet run
+Acesse o Swagger para testar todos os endpoints:
 
-!["UI showing testing an API"](images/scalar.png)
+bash
+Copiar código
+http://localhost:<porta>/swagger
+🧪 Testes
+Testes de unidade e de request foram implementados para Administrador e Veículos.
 
-
-4. **🔄 Iterate quickly:** Codespaces updates the server on each save, and VS Code's debugger lets you dig into the code execution.
-
-5. To stop running, return to VS Code, and click Stop twice in the debug toolbar. 
-
-![VS Code stop debuggin on both backend and frontend](images/StopRun.png)
-
-
-## Contributing
-
-This project welcomes contributions and suggestions.  Most contributions require you to agree to a
-Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
-the rights to use your contribution. For details, visit https://cla.opensource.microsoft.com.
-
-When you submit a pull request, a CLA bot will automatically determine whether you need to provide
-a CLA and decorate the PR appropriately (e.g., status check, comment). Simply follow the instructions
-provided by the bot. You will only need to do this once across all repos using our CLA.
-
-This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/).
-For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
-contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
-
-## Trademarks
-
-This project may contain trademarks or logos for projects, products, or services. Authorized use of Microsoft 
-trademarks or logos is subject to and must follow 
-[Microsoft's Trademark & Brand Guidelines](https://www.microsoft.com/en-us/legal/intellectualproperty/trademarks/usage/general).
-Use of Microsoft trademarks or logos in modified versions of this project must not cause confusion or imply Microsoft sponsorship.
-Any use of third-party trademarks or logos are subject to those third-party's policies.
+Cobertura de persistência e validações implementadas.
